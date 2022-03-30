@@ -18,6 +18,7 @@ public class CorsoDAO {
 	public List<Corso> getTuttiICorsi() {
 
 		final String sql = "SELECT * FROM corso";
+		//non ha messo Distinct perchè ogni volta che l'aggiungi alla lista se c'è già sovrascrivi
 
 		List<Corso> corsi = new LinkedList<Corso>();
 
@@ -37,6 +38,10 @@ public class CorsoDAO {
 				System.out.println(codins + " " + numeroCrediti + " " + nome + " " + periodoDidattico);
 
 				// Crea un nuovo JAVA Bean Corso
+				
+				Corso c=  new Corso (codins, numeroCrediti, nome, periodoDidattico);
+				corsi.add(c); 
+				
 				// Aggiungi il nuovo oggetto Corso alla lista corsi
 			}
 
