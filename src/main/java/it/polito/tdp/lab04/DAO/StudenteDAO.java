@@ -73,7 +73,7 @@ public class StudenteDAO {
 	public List<Studente> getStudentiCorsi (String codins){
 		String sql="SELECT s.matricola, s.nome, s.cognome, s.CDS "
 				+ "FROM studente s, iscrizione i "
-				+ "WHERE s.matricola=i.matricola AND i.codins=? AND s.cds<> '' "; 
+				+ "WHERE s.matricola=i.matricola AND i.codins=? "; 
 		// <> '' diverso da stringa vuota 
 		
 		List<Studente> result=  new ArrayList<Studente>(); 

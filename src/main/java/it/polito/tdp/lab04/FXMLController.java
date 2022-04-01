@@ -43,7 +43,10 @@ public class FXMLController {
     
     @FXML
     void iscrivi(ActionEvent event) {
-
+    	Studente s= model.getStudenti(Integer.parseInt(txtMatricola.getText())).get(0); 
+    	String corso= cmbCorsi.getValue().substring(0,8); 
+    	
+    	txtRisultato.setText(model.Iscrivi(s, corso));
     }
 
     @FXML
@@ -59,6 +62,8 @@ public class FXMLController {
         txtCognome.clear();
 
         int matricola= Integer.parseInt(txtMatricola.getText()); 
+        String c =cmbCorsi.getValue().substring(0,8);
+        
        	if(""+matricola==null || matricola==0) {
        		txtRisultato.appendText("Per favore inserisci una" +" matricola ");
        		return; 
@@ -69,14 +74,27 @@ public class FXMLController {
        		txtNome.setText(s.getNome());
        		txtCognome.setText(s.getCognome()); 
        		}
+       		
+       		if(cmbCorsi.getValue().compareTo("")!=0) {
+       			String result= model.isIscritto(c,matricola);
+       			txtRisultato.setText(result);
+       		}
        	}
+       	
+       	
        	
     	
     }
 
     @FXML
     void cercaCorsi(ActionEvent event) {
-
+    	txtRisultato.clear();
+    	
+    	int matricola = Integer.parseInt(txtMatricola.getText());
+    	
+    	for(Corso c: model.getCorsiStudente(model.getStudenti(matricola).get(0))) {
+    		txtRisultato.appendText(c.toString()+"\n");
+    	}
     }
 
     @FXML

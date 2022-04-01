@@ -1,5 +1,6 @@
 package it.polito.tdp.lab04.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import it.polito.tdp.lab04.DAO.CorsoDAO;
@@ -22,4 +23,28 @@ public class Model {
 		return s.getStudentiCorsi(codins); 
 	}
 
+	public List<Corso> getCorsiStudente(Studente st){
+		return c.getCorsiStudente(st);
+	}
+	
+	public String isIscritto (String cor, int mat) {
+		
+	 List <Studente> sIsc= new LinkedList<Studente>(s.getStudentiCorsi(cor));
+	 //la lista sIsc contiene tutti gli iscritti al corso 
+	 
+	 for (Studente stu: sIsc) {
+		if(stu.getMatricola()==mat) {
+			return "Studente già iscritto al corso"; 
+		}
+	}
+		return "Studente non iscritto al corso";
+	}
+	
+	public String Iscrivi (Studente stu, String cor)
+	{
+		boolean r=c.inscriviStudenteACorso(stu, cor);
+		if (r==true)
+			return "Utente iscritto";
+		return "Impossibile iscrivere l'utente";
+	}
 }
